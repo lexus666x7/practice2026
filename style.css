@@ -273,15 +273,14 @@ footer {
     .about-text {
         max-width: 100%;
     }
-
+    
     .about-text h2 {
         font-size: 28px;
-        margin-bottom: 16px;
     }
 
     .about-text p {
-        max-width: 100%;
-        font-size: 18px;
+        font-size: 16px;
+        line-height: 1.5;
     }
 
     .about-image img {
@@ -300,5 +299,10 @@ footer {
 
     .skills {
         grid-template-columns: 1fr;
+    }
+
+    section {
+        margin: 12px;
+        padding: 18px;
     }
 }
