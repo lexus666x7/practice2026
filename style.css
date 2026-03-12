@@ -70,12 +70,6 @@ nav a:hover {
   border-radius: 10px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
-@media (max-width: 768px) {
-  .hero {
-    flex-direction: column;
-    text-align: center;
-  }
-}
 .hero-left {
     max-width: 550px;
 }
@@ -189,17 +183,7 @@ header p {
 .profile-content h2 {
     margin-top: 0;
 }
-@media (max-width: 700px) {
-    .profile .container {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
 
-    .skills {
-        grid-template-columns: 1fr;
-    }
-}
 
 /* =====  SECTION ===== */
 
@@ -265,4 +249,56 @@ footer {
     text-align: center;
     padding: 30px 20px;
     margin-top: 40px;
+}
+
+/* =====  MEDIA QUERIES ===== */
+
+@media (max-width: 768px) {
+    
+    nav ul {
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+
+    .about {
+        padding: 60px 0;
+    }
+
+    .about-wrapper {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+
+    .about-text {
+        max-width: 100%;
+    }
+
+    .about-text h2 {
+        font-size: 28px;
+        margin-bottom: 16px;
+    }
+
+    .about-text p {
+        max-width: 100%;
+        font-size: 18px;
+    }
+
+    .about-image img {
+        width: 100%;
+        max-width: 320px;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .profile .container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .skills {
+        grid-template-columns: 1fr;
+    }
 }
