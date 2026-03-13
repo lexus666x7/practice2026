@@ -31,27 +31,66 @@ body {
 /* =====  NAV ===== */
 
 nav {
-    background: #222;
-    padding: 15px;
+    background: var(--bg-dark);
+    padding: 15px 0;
     position: sticky;
     top: 0;
     z-index: 1000;
 }
-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+.nav-container {
     display: flex;
-    justify-content: center;
-    gap: 30px;
-}
-nav a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
 }
 nav a:hover {
     color: #4caf50;
+}
+.logo {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+}
+.nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 24px;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+.nav-menu a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: bold;
+    transition: var(--transition);
+}
+.nav-menu a:hover {
+    color: var(--accent);
+}
+
+/* =====  BURGER ===== */
+
+.burger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+.burger span {
+    display: block;
+    width: 28px;
+    height: 3px;
+    background: var(--text-light);
+    border-radius: 2px;
+    transition: var(--transition);
 }
 
 /* =====  HERO ===== */
@@ -280,11 +319,37 @@ footer {
         justify-content: center;
         gap: 16px;
     }
+    
+    .nav-menu {
+        position: absolute;
+        top: 100%;
+        right: 20px;
+        left: 20px;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        padding: 20px;
+        background: var(--bg-dark);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
 
-    nav a {
-        display: inline-block;
-        padding: 8px 12px;
-        font-size: 15px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: var(--transition);
+    }
+    
+    .nav-menu.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .nav-menu a {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 10px 14px;
         border-radius: 8px;
         background: rgba(255, 255, 255, 0.06);
     }
