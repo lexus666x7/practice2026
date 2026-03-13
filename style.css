@@ -310,6 +310,10 @@ footer {
 
 @media (max-width: 768px) {
     
+    .burger {
+        display: flex;
+    }
+
     nav {
         padding: 12px 10px;
     }
