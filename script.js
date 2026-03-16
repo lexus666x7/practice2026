@@ -1,6 +1,11 @@
 const burger = document.getElementById("burger");
 const navMenu = document.getElementById("nav-menu");
+const themeToggle = document.getElementById("theme-toggle");
 const navLinks = document.querySelectorAll(".nav-menu a");
+const revealElements = document.querySelectorAll(".reveal");
+const sections = document.querySelectorAll("section[id]");
+
+/* =====  BURGER ===== */
 
 burger.addEventListener("click", () => {
     navMenu.classList.toggle("active");
@@ -14,29 +19,60 @@ navLinks.forEach(link => {
     });
 });
 
-const reveals = document.querySelectorAll(".reveal");
+/* =====  REVEAL: INTERSECTION OBSERVER ===== */
 
-function revealOnScroll() {
-    const windowHeight = window.innerHeight;
+const revealObserver = new IntersectionObserver(
+    (entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("active");
+                observer.unobserve(entry.target);
+            }
+        });
+    },
+    {
+        threshold: 0.18,
+        rootMargin: "0px 0px -40px 0px"
+    }
+);
 
-    reveals.forEach(section => {
-        const sectionTop = section.getBoundingClientRect().top;
-        const revealPoint = 120;
+revealElements.forEach(element => {
+    revealObserver.observe(element);
+});
 
-        if (sectionTop < windowHeight - revealPoint) {
-            section.classList.add("active");
+/* =====  ACTIVE NAV LINK ===== */
+
+function setActiveNavLink() {
+    let currentSectionId = "";
+
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop - 140;
+        const sectionHeight = section.offsetHeight;
+
+        if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+            currentSection = section.getAttribute("id");
+        }
+    });
+
+    navLinks.forEach(link => {
+        link.classList.remove("active");
+
+        if (link.getAttribute("href") === `#${currentSectionId}`) {
+            link.classList.add("active");
         }
     });
 }
 
-window.addEventListener("scroll", revealOnScroll);
-window.addEventListener("load", revealOnScroll);
+window.addEventListener("scroll", setActiveNavLink);
+window.addEventListener("load", setActiveNavLink);
 
-const themeToggle = document.getElementById("theme-toggle");
+/* =====  THEME TOGGLE ===== */
 
 if (localStorage.getItem("theme") === "dark") {
     document.body.classList.add("dark-theme");
     themeToggle.textContent = "☀️";
+} else {
+    themeToggle.textContent = "🌙";
 }
 
 themeToggle.addEventListener("click", () => {
@@ -46,7 +82,7 @@ themeToggle.addEventListener("click", () => {
         localStorage.setItem("theme", "dark");
         themeToggle.textContent = "☀️";
     } else {
-        localStorage.setItem("theme", "light");
+        localStrorage.setItem("theme", "light");
         themeToggle.textContent = "🌙";
     }
 });
